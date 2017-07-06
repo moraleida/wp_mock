@@ -2,19 +2,21 @@
 
 namespace WP_Mock;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\RiskyTestError;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestResult;
 
 class DeprecatedListener {
 
 	protected $calls = array();
 
-	/** @var \PHPUnit_Framework_TestResult */
+	/** @var RiskyTestError */
 	protected $testResult;
 
 	protected $testName;
 
 	/**
-	 * @var PHPUnit_Framework_TestCase
+	 * @var PHPUnit\Framework\TestCase
 	 */
 	protected $testCase;
 
@@ -30,12 +32,12 @@ class DeprecatedListener {
 		if ( empty( $this->calls ) ) {
 			return;
 		}
-		$e = new \PHPUnit_Framework_RiskyTestError( $this->getMessage() );
+		$e = new RiskyTestError( $this->getMessage() );
 		$this->testResult->addFailure( $this->testCase, $e, 0 );
 	}
 
 	/**
-	 * @param \PHPUnit_Framework_TestResult $testResult
+	 * @param TestResult $testResult
 	 */
 	public function setTestResult( $testResult ) {
 		$this->testResult = $testResult;
@@ -48,7 +50,7 @@ class DeprecatedListener {
 		$this->testName = $testName;
 	}
 
-	public function setTestCase( PHPUnit_Framework_TestCase $testCase ) {
+	public function setTestCase( TestCase $testCase ) {
 		$this->testCase = $testCase;
 	}
 

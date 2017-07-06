@@ -1,6 +1,8 @@
 <?php
 
-class DeprecatedMethodsTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class DeprecatedMethodsTest extends TestCase {
 
 	public function setUp() {
 		WP_Mock::setUp();

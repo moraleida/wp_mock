@@ -1,6 +1,8 @@
 <?php
 
-class FunctionMocksTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class FunctionMocksTest extends TestCase {
 
 	private $common_functions = array(
 		'esc_attr',

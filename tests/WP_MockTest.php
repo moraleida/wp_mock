@@ -1,6 +1,8 @@
 <?php
 
-class WP_MockTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class WP_MockTest extends TestCase {
 
 	/**
 	 * @runInSeparateProcess

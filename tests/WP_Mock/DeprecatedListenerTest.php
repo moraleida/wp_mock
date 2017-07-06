@@ -6,9 +6,10 @@ use Mockery;
 use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_RiskyTest;
 use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
-class DeprecatedListenerTest extends PHPUnit_Framework_TestCase {
+class DeprecatedListenerTest extends TestCase {
 
 	/** @var DeprecatedListener */
 	protected $object;
@@ -53,17 +54,17 @@ class DeprecatedListenerTest extends PHPUnit_Framework_TestCase {
 		$this->object->setTestCase( $testCase );
 		$result = Mockery::mock( 'PHPUnit_Framework_TestResult' );
 		$result->shouldReceive( 'addFailure' )
-			->once()
-			->andReturnUsing( function ( $case, $exception, $int ) use ( $testCase ) {
-				PHPUnit_Framework_Assert::assertSame( $testCase, $case );
-				PHPUnit_Framework_Assert::assertTrue( $exception instanceof PHPUnit_Framework_RiskyTest );
-				$message = <<<EOT
+			   ->once()
+			   ->andReturnUsing( function ( $case, $exception, $int ) use ( $testCase ) {
+				   PHPUnit_Framework_Assert::assertSame( $testCase, $case );
+				   PHPUnit_Framework_Assert::assertTrue( $exception instanceof PHPUnit_Framework_RiskyTest );
+				   $message = <<<EOT
 Deprecated WP Mock calls inside TestName:
   FooBar::bazBat ["string",true,42]
 EOT;
-				PHPUnit_Framework_Assert::assertEquals( $message, $exception->getMessage() );
-				PHPUnit_Framework_Assert::assertTrue( 0 === $int );
-			} );
+				   PHPUnit_Framework_Assert::assertEquals( $message, $exception->getMessage() );
+				   PHPUnit_Framework_Assert::assertTrue( 0 === $int );
+			   } );
 		/** @var \PHPUnit_Framework_TestResult $result */
 		$this->object->setTestResult( $result );
 
@@ -101,8 +102,8 @@ EOT;
 			PHPUnit_Framework_Assert::assertTrue( 0 === $int );
 		};
 		$result->shouldReceive( 'addFailure' )
-			->once()
-			->andReturnUsing( $testClosure );
+			   ->once()
+			   ->andReturnUsing( $testClosure );
 		/** @var \PHPUnit_Framework_TestResult $result */
 		$this->object->setTestResult( $result );
 
